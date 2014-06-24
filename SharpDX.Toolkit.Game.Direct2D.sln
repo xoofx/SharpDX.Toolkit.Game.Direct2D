@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C631AEDE-727B-4155-BEEC-5CC38CCE85AB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1", "App1\App1.csproj", "{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDX.Toolkit.Game.Ex.WinRT", "SharpDX.Toolkit.Game.Ex.WinRT\SharpDX.Toolkit.Game.Ex.WinRT.csproj", "{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|ARM.Build.0 = Debug|ARM
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|ARM.Deploy.0 = Debug|ARM
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|x64.ActiveCfg = Debug|x64
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|x64.Build.0 = Debug|x64
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|x64.Deploy.0 = Debug|x64
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|x86.ActiveCfg = Debug|x86
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|x86.Build.0 = Debug|x86
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Debug|x86.Deploy.0 = Debug|x86
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|ARM.ActiveCfg = Release|ARM
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|ARM.Build.0 = Release|ARM
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|ARM.Deploy.0 = Release|ARM
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|x64.ActiveCfg = Release|x64
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|x64.Build.0 = Release|x64
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|x64.Deploy.0 = Release|x64
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|x86.ActiveCfg = Release|x86
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|x86.Build.0 = Release|x86
+		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A}.Release|x86.Deploy.0 = Release|x86
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Debug|ARM.ActiveCfg = Debug|ARM
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Debug|ARM.Build.0 = Debug|ARM
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Debug|x64.ActiveCfg = Debug|x64
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Debug|x64.Build.0 = Debug|x64
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Debug|x86.ActiveCfg = Debug|x86
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Debug|x86.Build.0 = Debug|x86
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Release|ARM.ActiveCfg = Release|ARM
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Release|ARM.Build.0 = Release|ARM
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Release|x64.ActiveCfg = Release|x64
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Release|x64.Build.0 = Release|x64
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Release|x86.ActiveCfg = Release|x86
+		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
