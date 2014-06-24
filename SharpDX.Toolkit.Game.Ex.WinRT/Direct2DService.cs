@@ -24,6 +24,7 @@ namespace SharpDX.Toolkit
         #region Private fields
 
         private readonly IGraphicsDeviceService _graphicsDeviceService;
+        private GraphicsDevice graphicsDeviceCopy;
         private Device _device;
         private DeviceContext _deviceContext;
         private Factory1 _directWriteFactory;
@@ -86,12 +87,20 @@ namespace SharpDX.Toolkit
 
         private void GraphicsDeviceServiceOnDeviceChangeBegin(object sender, EventArgs e)
         {
-            // This is the best time where to dispose of the D2D resources created
-            DisposeAll();
+            // Dispose only the Direct2D bitmap
+            if (_target != null)
+            {
+                if (_deviceContext != null)
+                {
+                    _deviceContext.Target = null;
+                }
+                RemoveAndDispose(ref _target);
+            }
         }
 
         private void GraphicsDeviceServiceOnDeviceChangeEnd(object sender, EventArgs e)
         {
+            CreateOrUpdateDirect2D();
         }
 
         private void GraphicsDeviceServiceOnDeviceLost(object sender, EventArgs e)
@@ -106,14 +115,32 @@ namespace SharpDX.Toolkit
         /// <param name="e">Ignored.</param>
         private void GraphicsDeviceServiceOnDeviceCreated(object sender, EventArgs e)
         {
-            var device = (Direct3D11.Device)_graphicsDeviceService.GraphicsDevice;
-            using (var dxgiDevice = device.QueryInterface<DXGI.Device>())
+        }
+
+        private void CreateOrUpdateDirect2D()
+        {
+            // Dispose and recreate all devices only if the GraphicsDevice changed
+            if (graphicsDeviceCopy != _graphicsDeviceService.GraphicsDevice)
             {
-                _device = ToDispose(new Device(dxgiDevice, new CreationProperties { DebugLevel = D2DDebugLevel }));
-                _deviceContext = ToDispose(new DeviceContext(_device, DeviceContextOptions.None));
+                graphicsDeviceCopy = _graphicsDeviceService.GraphicsDevice;
+
+                DisposeAll();
+
+                var device = (Direct3D11.Device)_graphicsDeviceService.GraphicsDevice;
+                using (var dxgiDevice = device.QueryInterface<DXGI.Device>())
+                {
+                    _device = ToDispose(new Device(dxgiDevice, new CreationProperties { DebugLevel = D2DDebugLevel }));
+                    _deviceContext = ToDispose(new DeviceContext(_device, DeviceContextOptions.None));
+                }
+
+                _directWriteFactory = ToDispose(new Factory1());
             }
 
-            _directWriteFactory = ToDispose(new Factory1());
+            // Dispose the Direct2D bitmap
+            if (_target != null)
+            {
+                RemoveAndDispose(ref _target);
+            }
 
             // Create a Bitmap1 from backbuffer and make it the D2D context's target
             GraphicsDevice graphicsDevice = _graphicsDeviceService.GraphicsDevice;
@@ -138,10 +165,10 @@ namespace SharpDX.Toolkit
                 // It seems that Dispose() method is not implemented for this type
                 // If the following 3 lines are commented out, no error is produced but obviously no 2D content is drawn anymore
                 // Now the interesting part is that things do work even though this is error is produced, still it'd be nice to have no error
-                Bitmap1 target = ToDispose(new Bitmap1(DeviceContext, surface, properties));
-                _deviceContext.Target = target;
-                _target = target;
-            }
+                
+                _target = ToDispose(new Bitmap1(DeviceContext, surface, properties));
+                _deviceContext.Target = _target;
+            } 
         }
 
         /// <summary>

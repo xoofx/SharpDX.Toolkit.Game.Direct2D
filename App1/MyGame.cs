@@ -3,6 +3,7 @@ using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.Direct3D11;
 using SharpDX.DirectWrite;
+using SharpDX.DXGI;
 using SharpDX.IO;
 using SharpDX.Toolkit;
 using SharpDX.Toolkit.Graphics;
@@ -37,6 +38,7 @@ namespace App1 {
 
         public MyGame() {
             _graphicsDeviceManager = new GraphicsDeviceManager(this) {
+                PreferredBackBufferFormat = Format.B8G8R8A8_UNorm,
                 DeviceCreationFlags = DeviceCreationFlags.BgraSupport | DeviceCreationFlags.Debug
             };
 
@@ -159,26 +161,32 @@ namespace App1 {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             /* Direct2D / DirectWrite example */
             DeviceContext context = _service.DeviceContext;
-            if (context != null && context.Target != null) {
-                context.BeginDraw();
-                // example 1
-                context.Transform = Matrix3x2.Translation(new Vector2(20.0f, 20.0f));
-                context.DrawBitmap(_example1Bitmap, 0.75f, BitmapInterpolationMode.NearestNeighbor);
-                // example 2
-                context.Transform = Matrix3x2.Translation(new Vector2(220.0f, 20.0f));
-                context.FillEllipse(_example2Ellipse, _example2Brush1);
-                context.DrawEllipse(_example2Ellipse, _example2Brush2, 10.0f, _example2StrokeStyle);
-                // example 3
-                context.Transform = Matrix3x2.Translation(new Vector2(20.0f, 220.0f));
-                context.DrawGeometry(_example3Geometry, _example3Brush1, 10.0f);
-                context.FillGeometry(_example3Geometry, _example3Brush2);
-                // example 4
-                context.Transform = Matrix3x2.Translation(new Vector2(220.0f, 220.0f));
-                var rect = new RectangleF(20.0f, 20.0f, 200.0f, 200.0f);
-                context.DrawText("Hello, DirectWrite !", _example4TextFormat, rect, _example4Brush);
-                context.EndDraw();
-            }
 
+            // Caution, when accessing context.Target, It must be disposed as the returned object is created everytime
+            // we access the property, incrementing the reference counter on it
+            using (var target = context.Target)
+            {
+                if (context != null && target != null)
+                {
+                    context.BeginDraw();
+                    // example 1
+                    context.Transform = Matrix3x2.Translation(new Vector2(20.0f, 20.0f));
+                    context.DrawBitmap(_example1Bitmap, 0.75f, BitmapInterpolationMode.NearestNeighbor);
+                    // example 2
+                    context.Transform = Matrix3x2.Translation(new Vector2(220.0f, 20.0f));
+                    context.FillEllipse(_example2Ellipse, _example2Brush1);
+                    context.DrawEllipse(_example2Ellipse, _example2Brush2, 10.0f, _example2StrokeStyle);
+                    // example 3
+                    context.Transform = Matrix3x2.Translation(new Vector2(20.0f, 220.0f));
+                    context.DrawGeometry(_example3Geometry, _example3Brush1, 10.0f);
+                    context.FillGeometry(_example3Geometry, _example3Brush2);
+                    // example 4
+                    context.Transform = Matrix3x2.Translation(new Vector2(220.0f, 220.0f));
+                    var rect = new RectangleF(20.0f, 20.0f, 200.0f, 200.0f);
+                    context.DrawText("Hello, DirectWrite !", _example4TextFormat, rect, _example4Brush);
+                    context.EndDraw();
+                }
+            }
 
             /* Direct3D example */
             GraphicsDevice.SetVertexBuffer(_buffer);
